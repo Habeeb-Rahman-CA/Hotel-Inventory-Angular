@@ -25,9 +25,9 @@
             <td>{{e ? "Even" : "Odd"}}</td>
             <td>{{rooms.roomNumber}}</td>
             <td>{{rooms.roomType}}</td>
-            <td>{{rooms.price}}</td>
-            <td>{{rooms.amenities}}</td>
-            <td>{{rooms.checkInTime}}</td>
+            <td>{{rooms.price | currency: 'INR'}}</td>
+            <td>{{rooms.amenities | titlecase}}</td>
+            <td>{{rooms.checkInTime | date: 'MMM dd, yyyy'}}</td>
         </tr>
     </table>
 </div>
