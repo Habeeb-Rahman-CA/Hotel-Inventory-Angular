@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { RoomsList } from '../rooms';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -8,14 +8,21 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './rooms-list.component.html',
-  styleUrl: './rooms-list.component.css'
+  styleUrl: './rooms-list.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RoomsListComponent implements OnInit {
 
-  @Input() rooms: RoomsList[] = []
+  @Input() rooms: RoomsList[] = [];
+
+  @Output() selectedRoom = new EventEmitter<RoomsList>();
 
   ngOnInit(): void {
 
+  }
+
+  selectRoom(room: RoomsList){
+    this.selectedRoom.emit(room)
   }
 
 }

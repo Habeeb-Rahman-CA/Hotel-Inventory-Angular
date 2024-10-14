@@ -16,6 +16,8 @@ export class RoomsComponent implements OnInit {
   numberOfRooms = 10
   hideRooms = false
 
+  selectedRooms!: RoomsList
+
   room: Rooms = {
     totalRooms: 20,
     availableRooms: 10,
@@ -57,5 +59,23 @@ export class RoomsComponent implements OnInit {
 
   toggle() {
     this.hideRooms = !this.hideRooms
+  }
+
+  selectRoom(room: RoomsList) {
+    this.selectedRooms = room
+  }
+
+  addRoom() {
+    const room: RoomsList = {
+      roomNumber: 104,
+      roomType: '1BHK',
+      amenities: 'One bed, Fan',
+      price: 150,
+      photos: 'https://media.istockphoto.com/id/1482326431/photo/interior-bedroom-wall-mockup-3d-rendering-3d-illustration.jpg?s=1024x1024&w=is&k=20&c=-_XHOAGB-hqt1vQ8vOtm7sebCCTHtl4mAR4Yuph-HyI=',
+      checkInTime: new Date('15-Nov-2024'),
+      checkOutTime: new Date('16-Nov-2024'),
+      rating: 6.03
+    }
+    this.roomList = [...this.roomList, room]
   }
 }

@@ -7,8 +7,14 @@
 
 {{room?.availableRooms ?? 'No Rooms available'}}
 
-<div *ngIf="room.availableRooms > 0">
-    <app-rooms-list [rooms]="roomList"></app-rooms-list>
+<div *ngIf="selectedRooms">{{selectedRooms | json}}</div>
+
+<div>
+    <button class="btn btn-success" (click)="addRoom()">Add Rooms</button>
 </div>
 
-<button (click)="toggle()">Toggle</button>
+<div *ngIf="room.availableRooms > 0">
+    <app-rooms-list [rooms]="roomList" (selectedRoom)="selectRoom($event)"></app-rooms-list>
+</div>
+
+<button class="btn btn-outline-dark" (click)="toggle()">Toggle</button>
