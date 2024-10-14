@@ -2,34 +2,13 @@
 
 <div [hidden]="hideRooms">
     Number of Rooms:
-    <div [ngStyle]="{'color': rooms.availableRooms ? 'green' : 'red'}" [innerText]="numberOfRooms"></div>
+    <div [ngStyle]="{'color': room.availableRooms ? 'green' : 'red'}" [innerText]="numberOfRooms"></div>
 </div>
 
-{{rooms?.availableRooms ?? 'No Rooms available'}}
+{{room?.availableRooms ?? 'No Rooms available'}}
 
-<div *ngIf="rooms.availableRooms > 0">
-    Rooms list
-    <!-- rooms-list -->
-    <table>
-        <tr [ngClass]="'header'">
-            <th>Index</th>
-            <th>Even/Odd</th>
-            <th>Room Number</th>
-            <th>Room Type</th>
-            <th>Room Price</th>
-            <th>Room Amenities</th>
-            <th>Check In Time</th>
-        </tr>
-        <tr [ngClass]="e? 'even' : 'odd'" *ngFor="let rooms of roomList; let e=even; let o=odd; let i=index">
-            <td>{{i}}</td>
-            <td>{{e ? "Even" : "Odd"}}</td>
-            <td>{{rooms.roomNumber}}</td>
-            <td>{{rooms.roomType}}</td>
-            <td>{{rooms.price | currency: 'INR'}}</td>
-            <td>{{rooms.amenities | titlecase}}</td>
-            <td>{{rooms.checkInTime | date: 'MMM dd, yyyy'}}</td>
-        </tr>
-    </table>
+<div *ngIf="room.availableRooms > 0">
+    <app-rooms-list [rooms]="roomList"></app-rooms-list>
 </div>
 
 <button (click)="toggle()">Toggle</button>
