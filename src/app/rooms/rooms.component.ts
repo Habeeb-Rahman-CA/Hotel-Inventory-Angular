@@ -1,14 +1,13 @@
 import { AfterViewChecked, AfterViewInit, Component, DoCheck, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Rooms, RoomsList } from './rooms';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { RoomsListComponent } from './rooms-list/rooms-list.component';
 import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-rooms',
   standalone: true,
-  imports: [CommonModule, FormsModule, RoomsListComponent, HeaderComponent],
+  imports: [CommonModule, RoomsListComponent, HeaderComponent],
   templateUrl: './rooms.component.html',
   styleUrl: './rooms.component.css'
 })
