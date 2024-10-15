@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, DoCheck, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Rooms, RoomsList } from './rooms';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RoomsListComponent } from './rooms-list/rooms-list.component';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-rooms',
   standalone: true,
-  imports: [CommonModule, FormsModule, RoomsListComponent],
+  imports: [CommonModule, FormsModule, RoomsListComponent, HeaderComponent],
   templateUrl: './rooms.component.html',
   styleUrl: './rooms.component.css'
 })
-export class RoomsComponent implements OnInit {
+export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterViewChecked {
+  
   hotelName = 'Marjan Hotel';
   numberOfRooms = 10
   hideRooms = false
@@ -24,7 +26,14 @@ export class RoomsComponent implements OnInit {
     bookedRooms: 5
   }
 
+  @ViewChild(HeaderComponent) headerComponent! : HeaderComponent
+
+  @ViewChildren(HeaderComponent) headerChildren! : QueryList<HeaderComponent>
+
+  title = 'Room List'
+
   roomList: RoomsList[] = []
+
 
   ngOnInit(): void {
     this.roomList = [{
@@ -57,8 +66,21 @@ export class RoomsComponent implements OnInit {
     }]
   }
 
+  ngDoCheck(): void {
+      console.log('change are made');
+  }
+
+  ngAfterViewInit(): void {
+      this.headerComponent.title = this.hotelName
+  }
+
+  ngAfterViewChecked(): void {
+      
+  }
+
   toggle() {
     this.hideRooms = !this.hideRooms
+    this.title = 'Rooms List'
   }
 
   selectRoom(room: RoomsList) {
