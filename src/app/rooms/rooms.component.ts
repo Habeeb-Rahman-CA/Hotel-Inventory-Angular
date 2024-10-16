@@ -1,8 +1,9 @@
-import { AfterViewChecked, AfterViewInit, Component, DoCheck, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, DoCheck, OnInit, QueryList, SkipSelf, ViewChild, ViewChildren } from '@angular/core';
 import { Rooms, RoomsList } from './rooms';
 import { CommonModule } from '@angular/common';
 import { RoomsListComponent } from './rooms-list/rooms-list.component';
 import { HeaderComponent } from '../header/header.component';
+import { RoomsService } from './services/rooms.service';
 
 @Component({
   selector: 'app-rooms',
@@ -12,7 +13,7 @@ import { HeaderComponent } from '../header/header.component';
   styleUrl: './rooms.component.css'
 })
 export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterViewChecked {
-  
+
   hotelName = 'Marjan Hotel';
   numberOfRooms = 10
   hideRooms = false
@@ -25,56 +26,30 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
     bookedRooms: 5
   }
 
-  @ViewChild(HeaderComponent) headerComponent! : HeaderComponent
+  @ViewChild(HeaderComponent) headerComponent!: HeaderComponent
 
-  @ViewChildren(HeaderComponent) headerChildren! : QueryList<HeaderComponent>
+  @ViewChildren(HeaderComponent) headerChildren!: QueryList<HeaderComponent>
 
   title = 'Room List'
 
   roomList: RoomsList[] = []
 
+  constructor(@SkipSelf()  private roomsServices: RoomsService) { }
 
   ngOnInit(): void {
-    this.roomList = [{
-      roomNumber: 101,
-      roomType: 'Deluxe Room',
-      amenities: 'Air conditioner, Free Wifi, TV',
-      price: 500,
-      photos: 'https://media.istockphoto.com/id/1482326431/photo/interior-bedroom-wall-mockup-3d-rendering-3d-illustration.jpg?s=1024x1024&w=is&k=20&c=-_XHOAGB-hqt1vQ8vOtm7sebCCTHtl4mAR4Yuph-HyI=',
-      checkInTime: new Date('11-Nov-2024'),
-      checkOutTime: new Date('12-Nov-2024'),
-      rating: 4.534,
-    }, {
-      roomNumber: 102,
-      roomType: 'Luxury Room',
-      amenities: 'Air conditioner, Free Wifi, TV, Bathroom, Kitchen',
-      price: 1500,
-      photos: 'https://media.istockphoto.com/id/1482326431/photo/interior-bedroom-wall-mockup-3d-rendering-3d-illustration.jpg?s=1024x1024&w=is&k=20&c=-_XHOAGB-hqt1vQ8vOtm7sebCCTHtl4mAR4Yuph-HyI=',
-      checkInTime: new Date('21-Nov-2024'),
-      checkOutTime: new Date('22-Nov-2024'),
-      rating: 3.3789,
-    }, {
-      roomNumber: 103,
-      roomType: 'Private Suite',
-      amenities: 'Free Wifi, TV',
-      price: 300,
-      photos: 'https://media.istockphoto.com/id/1482326431/photo/interior-bedroom-wall-mockup-3d-rendering-3d-illustration.jpg?s=1024x1024&w=is&k=20&c=-_XHOAGB-hqt1vQ8vOtm7sebCCTHtl4mAR4Yuph-HyI=',
-      checkInTime: new Date('1-Nov-2024'),
-      checkOutTime: new Date('2-Nov-2024'),
-      rating: 4.123,
-    }]
+    this.roomList = this.roomsServices.getRooms();
   }
 
   ngDoCheck(): void {
-      console.log('change are made');
+    console.log('change are made');
   }
 
   ngAfterViewInit(): void {
-      this.headerComponent.title = this.hotelName
+    this.headerComponent.title = this.hotelName
   }
 
   ngAfterViewChecked(): void {
-      
+
   }
 
   toggle() {
