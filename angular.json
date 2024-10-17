@@ -63,7 +63,8 @@
               "buildTarget": "sample:build:production"
             },
             "development": {
-              "buildTarget": "sample:build:development"
+              "buildTarget": "sample:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

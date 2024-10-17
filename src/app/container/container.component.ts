@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ContentChild, Host } from '@angular/core';
+import { AfterContentInit, Component, ContentChild } from '@angular/core';
 import { EmployeeComponent } from '../employee/employee.component';
 import { CommonModule } from '@angular/common';
 import { RoomsService } from '../rooms/services/rooms.service';
@@ -8,14 +8,13 @@ import { RoomsService } from '../rooms/services/rooms.service';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './container.component.html',
-  styleUrl: './container.component.css',
-  providers: [RoomsService]
+  styleUrl: './container.component.css'
 })
 export class ContainerComponent implements AfterContentInit {
 
   @ContentChild(EmployeeComponent) employee!: EmployeeComponent
 
-  constructor(@Host() private roomsServices: RoomsService) { }
+  constructor() { }
 
   ngAfterContentInit(): void {
     this.employee.empName = "Rahman"

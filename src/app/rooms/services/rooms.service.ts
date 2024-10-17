@@ -1,7 +1,8 @@
 import { Inject, Injectable } from '@angular/core';
-import { RoomsList } from '../rooms';
+import { Rooms, RoomsList } from '../rooms';
 import { APP_SERVICE_CONFIG } from '../../AppConfig/appconfig.service';
 import { AppConfig } from '../../AppConfig/appconfig.interface';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -9,42 +10,34 @@ import { AppConfig } from '../../AppConfig/appconfig.interface';
 
 export class RoomsService {
 
-  roomList: RoomsList[] = [{
-    roomNumber: 101,
-    roomType: 'Deluxe Room',
-    amenities: 'Air conditioner, Free Wifi, TV',
-    price: 500,
-    photos: 'https://media.istockphoto.com/id/1482326431/photo/interior-bedroom-wall-mockup-3d-rendering-3d-illustration.jpg?s=1024x1024&w=is&k=20&c=-_XHOAGB-hqt1vQ8vOtm7sebCCTHtl4mAR4Yuph-HyI=',
-    checkInTime: new Date('11-Nov-2024'),
-    checkOutTime: new Date('12-Nov-2024'),
-    rating: 4.534,
-  }, {
-    roomNumber: 102,
-    roomType: 'Luxury Room',
-    amenities: 'Air conditioner, Free Wifi, TV, Bathroom, Kitchen',
-    price: 1500,
-    photos: 'https://media.istockphoto.com/id/1482326431/photo/interior-bedroom-wall-mockup-3d-rendering-3d-illustration.jpg?s=1024x1024&w=is&k=20&c=-_XHOAGB-hqt1vQ8vOtm7sebCCTHtl4mAR4Yuph-HyI=',
-    checkInTime: new Date('21-Nov-2024'),
-    checkOutTime: new Date('22-Nov-2024'),
-    rating: 3.3789,
-  }, {
-    roomNumber: 103,
-    roomType: 'Private Suite',
-    amenities: 'Free Wifi, TV',
-    price: 300,
-    photos: 'https://media.istockphoto.com/id/1482326431/photo/interior-bedroom-wall-mockup-3d-rendering-3d-illustration.jpg?s=1024x1024&w=is&k=20&c=-_XHOAGB-hqt1vQ8vOtm7sebCCTHtl4mAR4Yuph-HyI=',
-    checkInTime: new Date('1-Nov-2024'),
-    checkOutTime: new Date('2-Nov-2024'),
-    rating: 4.123,
-  }]
+  roomList: RoomsList[] = []
 
-  constructor(@Inject(APP_SERVICE_CONFIG) private config: AppConfig ) {
-    console.log(this.config.apiUrl);
+  constructor(@Inject(APP_SERVICE_CONFIG) private config: AppConfig, private http: HttpClient ) {
+    console.log(this.config.apiEndpoint);
     console.log('Rooms servies are injecting...');
   }
 
   getRooms(){
-    return this.roomList
+    return this.http.get<RoomsList[]>('/api/rooms')
+  }
+
+  addRoom(room: RoomsList){
+    return this.http.post<RoomsList[]>('/api/rooms', room)
+  }
+
+  editRoom(room: RoomsList){
+    return this.http.put<RoomsList[]>(`/api/rooms/${room.roomNumber}`, room)
+  }
+
+  deleteRoom(id: string){
+    return this.http.delete<RoomsList[]>(`/api/rooms/${id}`)
+  }
+
+  getPhotos() {
+    const request = new HttpRequest('GET', `https://jsonplaceholder.typicode.com/photos`, {
+      reportProgress: true,
+    })
+    return this.http.request(request)
   }
 
 }
