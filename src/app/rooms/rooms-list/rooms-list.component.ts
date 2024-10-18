@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class RoomsListComponent implements OnInit, OnChanges, OnDestroy {
 
-  @Input() rooms: RoomsList[] = [];
+  @Input() rooms: RoomsList[] | null = [];
 
   @Input() title: string = ''
 

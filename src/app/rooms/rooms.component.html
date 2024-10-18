@@ -1,6 +1,8 @@
 <!-- <h1>Welcome to {{hotelName}}</h1> -->
  <app-header></app-header>
 
+ {{rooms$ | async | json}}
+
 <div [hidden]="hideRooms">
     Number of Rooms:
     <div [ngStyle]="{'color': room.availableRooms ? 'green' : 'red'}" [innerText]="numberOfRooms"></div>
@@ -14,8 +16,11 @@
     <button class="btn btn-success" (click)="addRoom()">Add Rooms</button>
 </div>
 
-<div *ngIf="hideRooms">
-    <app-rooms-list [rooms]="roomList" [title]="title" (selectedRoom)="selectRoom($event)"></app-rooms-list>
+<h2>{{getError$}}</h2>
+<h1>Number of Rooms: {{roomsCount$ | async}}</h1>
+
+<div *ngIf="rooms$ | async as rooms">
+    <app-rooms-list [rooms]="rooms" [title]="title" (selectedRoom)="selectRoom($event)"></app-rooms-list>
 </div>
 
 <button class="btn btn-outline-dark" (click)="toggle()">Toggle</button>
