@@ -49,25 +49,11 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
 
   subscription !: Subscription
 
-  error$ = new Subject<string>
 
-  getError$ = this.error$.asObservable
-
-  rooms$ = this.roomsService.getRooms$.pipe(
-    catchError((err) => {
-      console.error(err)
-      this.error$.next(err)
-      return of([])
-    })
-  )
-
-  roomsCount$ = this.roomsService.getRooms$.pipe(
-    map((rooms) => rooms.length)
-  )
-
-  constructor(@SkipSelf() private roomsService: RoomsService) { }
+  constructor(@SkipSelf() private roomsService: RoomsService ) { }
 
   ngOnInit(): void {
+
     this.roomsService.getPhotos().subscribe((event) => {
       switch (event.type) {
         case HttpEventType.Sent: {

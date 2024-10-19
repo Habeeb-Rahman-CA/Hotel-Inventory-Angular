@@ -2,8 +2,8 @@ import { Inject, Injectable } from '@angular/core';
 import { RoomsList } from '../rooms';
 import { APP_SERVICE_CONFIG } from '../../AppConfig/appconfig.service';
 import { AppConfig } from '../../AppConfig/appconfig.interface';
-import { HttpClient, HttpRequest } from '@angular/common/http';
-import { shareReplay } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
+import { catchError, Observable, of, shareReplay } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,30 +13,29 @@ export class RoomsService {
 
   roomList: RoomsList[] = []
 
-  
- getRooms$ = this.http.get<RoomsList[]>('/api/rooms').pipe(
-    shareReplay(1)
-  ) 
- 
+  // headers = new HttpHeaders({ 'token': '136423647dfh234' })
 
-  constructor(@Inject(APP_SERVICE_CONFIG) private config: AppConfig, private http: HttpClient ) {
+
+  constructor(@Inject(APP_SERVICE_CONFIG) private config: AppConfig, private http: HttpClient) {
     console.log(this.config.apiEndpoint);
     console.log('Rooms servies are injecting...');
   }
 
-  getRooms(){
+  getRooms() {
     return this.http.get<RoomsList[]>('/api/rooms')
   }
 
-  addRoom(room: RoomsList){
-    return this.http.post<RoomsList[]>('/api/rooms', room)
+  addRoom(room: RoomsList) {
+    return this.http.post<RoomsList[]>('/api/rooms', room, {
+      // headers: this.headers
+    })
   }
 
-  editRoom(room: RoomsList){
+  editRoom(room: RoomsList) {
     return this.http.put<RoomsList[]>(`/api/rooms/${room.roomNumber}`, room)
   }
 
-  deleteRoom(id: string){
+  deleteRoom(id: string) {
     return this.http.delete<RoomsList[]>(`/api/rooms/${id}`)
   }
 
