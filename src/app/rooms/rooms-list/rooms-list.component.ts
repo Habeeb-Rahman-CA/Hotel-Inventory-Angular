@@ -2,11 +2,12 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnD
 import { RoomsList } from '../rooms';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-rooms-list',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './rooms-list.component.html',
   styleUrl: './rooms-list.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush

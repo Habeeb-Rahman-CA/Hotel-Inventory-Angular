@@ -6,11 +6,12 @@ import { HeaderComponent } from '../header/header.component';
 import { RoomsService } from './services/rooms.service';
 import { catchError, map, Observable, of, Subject, Subscription } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-rooms',
   standalone: true,
-  imports: [CommonModule, RoomsListComponent, HeaderComponent],
+  imports: [CommonModule, RoomsListComponent, HeaderComponent, RouterModule],
   templateUrl: './rooms.component.html',
   styleUrl: './rooms.component.css'
 })

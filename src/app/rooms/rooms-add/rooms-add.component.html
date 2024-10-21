@@ -1,0 +1,48 @@
+{{ roomForm.pristine | json }}
+{{ roomForm.dirty | json }}
+{{ roomForm.valid | json }} <!-- if all is fine, it shows that valid is true -->
+{{ roomForm.invalid | json }} <!-- if any error, it shows that invalid is true -->
+{{ roomForm.value | json }}
+
+<div *ngIf="successMessage !== ''" class="alert alert-success">
+    {{successMessage}}
+</div>
+
+<form #roomForm="ngForm" (ngSubmit)="addRoom()">
+    <div class="form-group">
+        <input #roomtype="ngModel" [(ngModel)]="room.roomType" class="form-control" type="text" name="roomType" placeholder="Room Type"
+            required="">
+            <div class="alert alert-danger" *ngIf="roomtype.errors?.['required']">
+                Room Type is Required
+            </div>
+    </div>
+    <div class="form-group">
+        <input #roomAmenities="ngModel" [(ngModel)]="room.amenities" class="form-control" type="text" name="amenities" placeholder="Amenities"
+            required="" minlength="5" maxlength="200">
+            <div class="alert alert-danger" *ngIf="roomAmenities.errors?.['minlength']">
+                Minimum 5 character needed
+            </div>
+    </div>
+    <div class="form-group">
+        <input [(ngModel)]="room.price" class="form-control" type="number" name="price" placeholder="Price" required="">
+    </div>
+    <div class="form-group">
+        <input [(ngModel)]="room.photos" class="form-control" type="url" name="photo" placeholder="Photo Url"
+            required="">
+    </div>
+    <div class="form-group">
+        <input [(ngModel)]="room.checkInTime" class="form-control" type="datetime" name="checkIn"
+            placeholder="Check In Time" required="">
+    </div>
+    <div class="form-group">
+        <input [(ngModel)]="room.checkOutTime" class="form-control" type="datetime" name="checkout"
+            placeholder="Check Out Time" required="">
+    </div>
+    <div class="form-group">
+        <input [(ngModel)]="room.rating" class="form-control" type="number" name="rating" placeholder="Rating"
+            required="" min="1" max="5">
+    </div>
+    <div>
+        <button [disabled]="roomForm.invalid" class="btn btn-primary" type="submit">Submit</button>
+    </div>
+</form>
