@@ -22,12 +22,23 @@ export class RoomsAddComponent {
     checkOutTime: new Date(),
     photos: '',
     price: 0,
-    rating: 1
+    rating: 0
   }
 
-  constructor(private roomService: RoomsService, ){}
+  constructor(private roomService: RoomsService,) { }
 
-  addRoom(){
-    this.roomService.addRoom(this.room).subscribe((data) => (this.successMessage = 'Room Added Successfully'))
+  addRoom(roomForm: NgForm) {
+    this.roomService.addRoom(this.room).subscribe((data) => {
+      this.successMessage = 'Room Added Successfully'
+      roomForm.resetForm({
+        roomType: '',
+        amenities: '',
+        checkInTime: new Date(),
+        checkOutTime: new Date(),
+        photos: '',
+        price: 0,
+        rating: 0
+      })
+    })
   }
 }

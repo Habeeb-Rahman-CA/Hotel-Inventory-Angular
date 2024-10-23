@@ -8,11 +8,11 @@
     {{successMessage}}
 </div>
 
-<form #roomForm="ngForm" (ngSubmit)="addRoom()">
+<form #roomForm="ngForm" (ngSubmit)="addRoom(roomForm)">
     <div class="form-group">
         <input #roomtype="ngModel" [(ngModel)]="room.roomType" class="form-control" type="text" name="roomType" placeholder="Room Type"
             required="">
-            <div class="alert alert-danger" *ngIf="roomtype.errors?.['required']">
+            <div class="text-danger" *ngIf="roomtype.dirty && roomtype.errors?.['required']">
                 Room Type is Required
             </div>
     </div>

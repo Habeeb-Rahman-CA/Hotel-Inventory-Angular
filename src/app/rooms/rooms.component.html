@@ -1,5 +1,3 @@
-<!-- <h1>Welcome to {{hotelName}}</h1> -->
- <app-header></app-header>
 
 
 <div [hidden]="hideRooms">
@@ -12,7 +10,7 @@
 <div *ngIf="selectedRooms">{{selectedRooms | json}}</div>
 
 <div>
-    <button class="btn btn-success" (click)="addRoom()">Add Rooms</button>
+    <button class="btn btn-success" routerLink="add">Add Rooms</button>
 </div>
 
 <div *ngIf="roomList">
@@ -26,3 +24,5 @@
 <h1>{{totolBytes}} loaded</h1>
 
 <button class="btn btn-outline-dark" (click)="deleteRoom()">Delete</button>
+
+<router-outlet></router-outlet>
