@@ -7,6 +7,7 @@ import { RoomsService } from './services/rooms.service';
 import { catchError, map, Observable, of, Subject, Subscription } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { ConfigService } from '../services/config.service';
 
 @Component({
   selector: 'app-rooms',
@@ -51,7 +52,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
   subscription !: Subscription
 
 
-  constructor(@SkipSelf() private roomsService: RoomsService ) { }
+  constructor(@SkipSelf() private roomsService: RoomsService, private configService:ConfigService ) { }
 
   ngOnInit(): void {
 

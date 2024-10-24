@@ -1,0 +1,23 @@
+.example-form {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.address-details{
+  margin: 20px 0;
+}
+
+button{
+  margin: 20px 0;
+}
+
+.g-btn{
+  margin: -15px 0;
+  display: flex;
+  justify-content: end;
+  align-items: end;
+}

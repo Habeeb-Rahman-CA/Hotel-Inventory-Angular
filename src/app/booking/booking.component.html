@@ -1,1 +1,112 @@
-<p>booking works!</p>
+<h2>Booking Form</h2>
+
+{{bookingForm.value | json}}
+{{bookingForm.pristine | json}}
+{{bookingForm.dirty | json}}
+
+<div>
+    <button mat-flat-button type="button" (click)="addPassport()">Add Passport</button>
+</div>
+<div>
+    <button mat-flat-button type="button" (click)="deletePassport()">Delete Passport</button>
+</div>
+
+<form [formGroup]="bookingForm" class="example-form" (ngSubmit)="addBooking()">
+    <mat-form-field class="example-full-width" *ngIf="bookingForm.get('passport')">
+        <mat-label>Passport Number</mat-label>
+        <input type="number" matInput formControlName="passport" placeholder="Passport Number">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Room ID</mat-label>
+        <input type="text" matInput formControlName="roomId" placeholder="Ex. 101">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput formControlName="guestEmail" placeholder="Ex. guest@mail.co">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>CheckIn</mat-label>
+        <input type="date" matInput formControlName="checkIn">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Check Out</mat-label>
+        <input type="date" matInput formControlName="checkOut">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Booking Status</mat-label>
+        <input type="text" matInput formControlName="bookingStatus" placeholder="Ex. Booked">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Booking Amount</mat-label>
+        <input type="number" matInput formControlName="bookingAmount" placeholder="Ex. Paid Amount">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Booking Date</mat-label>
+        <input type="date" matInput formControlName="bookingDate" placeholder="Date of Room Booked">
+    </mat-form-field>
+
+    <div formGroupName="guestDetails" class="address-details">
+        <mat-accordion class="example-headers-align" multi>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title> Address </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>Guest Name</mat-label>
+                    <input type="text" matInput formControlName="guestName" placeholder="Name of the booked person">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>Guest Address</mat-label>
+                    <input type="text" matInput formControlName="guestAddress"
+                        placeholder="Ex. House name, Street, City, District, PIN and State">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>Mobile Number</mat-label>
+                    <input type="number" matInput formControlName="roomid" placeholder="Ex. +91 123 456 7890">
+                </mat-form-field>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+
+    <div formArrayName="guests">
+        <mat-accordion class="example-headers-align" multi>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title> Guests </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div *ngFor="let guest of guests.controls; let i=index">
+                    <div [formGroupName]="i">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Name</mat-label>
+                            <input type="text" matInput formControlName="name" placeholder="Name">
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Age</mat-label>
+                            <input type="number" matInput formControlName="age" placeholder="Age">
+                        </mat-form-field>
+                    </div>
+
+                </div>
+                <div class="g-btn">
+                    <button mat-flat-button type="button" (click)="addGuest()">Add Guest</button>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+
+    <div>
+        <button mat-flat-button>Book Room</button>
+    </div>
+
+</form>
+
+
+<!-- @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+          <mat-error>Please enter a valid email address</mat-error>
+        }
+        @if (emailFormControl.hasError('required')) {
+          <mat-error>Email is <strong>required</strong></mat-error>
+        } -->
