@@ -39,7 +39,7 @@
             placeholder="Check Out Time" required="">
     </div>
     <div class="form-group">
-        <input [(ngModel)]="room.rating" class="form-control" type="number" name="rating" placeholder="Rating"
+        <input [(ngModel)]="room.rating" [ngModelOptions]="{updateOn: 'blur'}" class="form-control" type="number" name="rating" placeholder="Rating"
             required="" min="1" max="5">
     </div>
     <div>

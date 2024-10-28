@@ -3,6 +3,10 @@
   width: 100%;
 }
 
+.example-margin{
+  margin: 20px 0;
+}
+
 .example-full-width {
   width: 100%;
 }
@@ -12,12 +16,81 @@
 }
 
 button{
-  margin: 20px 0;
+  margin: 10px 0;
+  transition: all 0.3s ease;
 }
 
-.g-btn{
+.add-btn {
   margin: -15px 0;
   display: flex;
-  justify-content: end;
-  align-items: end;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-btn button{
+  width: 500px;
+  background-color: transparent;
+  border: 2px solid #24a401;
+  color: #24a401;
+}
+
+.add-btn button:hover{
+  background-color: #24a401;
+  color: #ffffff;
+}
+
+
+.delete-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-btn button{
+  width: 500px;
+  background-color: transparent;
+  border: 2px solid #f32020;
+  color: #f32020;
+}
+.delete-btn button:hover{
+  background-color: #f32020;
+  color: #ffffff;
+}
+
+.book-btn{
+  margin: 30px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.book-btn button{
+  width: 500px;
+  background-color: transparent;
+  border: 2px solid #3145ff;
+  color: #3145ff;
+}
+.book-btn button:hover{
+  background-color: #3145ff;
+  color: #ffffff;
+}
+
+.pass-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.pass-btn button{
+  width: 250px;
+  background-color: transparent;
+  border: 2px solid #7ab1e8;
+  color: #7ab1e8;
+}
+
+.pass-btn button:hover{
+  background-color: #7ab1e8;
+  border: 2px solid #7ab1e8;
+  color: white;
 }
