@@ -3,8 +3,9 @@ import { CommentsService } from './comments.service';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { Observable } from 'rxjs';
+import { map, Observable, pluck } from 'rxjs';
 import { Comments } from './comments';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-comments',
@@ -17,7 +18,11 @@ export class CommentsComponent implements OnInit {
 
   comments$ = this.commentService.getComments()
 
-  constructor(private commentService: CommentsService) { }
+  comment$ = this.activatedRoute.data.pipe(
+    map(data => data['comments'])
+  )
+
+  constructor(private commentService: CommentsService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     

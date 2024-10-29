@@ -9,6 +9,7 @@ import { loginGuard } from './guards/login.guard';
 import { roomGuard } from './rooms/guards/room.guard';
 import { bookingGuard } from './booking/guard/booking.guard';
 import { CommentsComponent } from './comments/comments.component';
+import { CommentsResolverService } from './comments/guards/comments-resolver.service';
 
 export const routes: Routes = [
     { path: 'employee', component: EmployeeComponent, canActivate: [loginGuard] },
@@ -24,7 +25,7 @@ export const routes: Routes = [
 
     },
     { path: 'login', component: LoginComponent },
-    { path: 'comments', component: CommentsComponent },
+    { path: 'comments', component: CommentsComponent, resolve: {comments: CommentsResolverService}, canActivate: [loginGuard] },
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: '**', component: NotfoundComponent }
 ];

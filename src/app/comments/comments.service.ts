@@ -12,4 +12,6 @@ export class CommentsService {
   getComments(){
     return this.http.get<Comments[]>('https://jsonplaceholder.typicode.com/comments')
   }
+
+  
 }
