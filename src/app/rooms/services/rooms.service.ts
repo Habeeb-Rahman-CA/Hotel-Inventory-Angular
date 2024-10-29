@@ -13,6 +13,8 @@ export class RoomsService {
 
   roomList: RoomsList[] = []
 
+  getRooms$ = this.http.get<RoomsList>('/api/rooms').pipe(shareReplay(1))
+
   // headers = new HttpHeaders({ 'token': '136423647dfh234' })
 
 
@@ -26,9 +28,7 @@ export class RoomsService {
   }
 
   addRoom(room: RoomsList) {
-    return this.http.post<RoomsList[]>('/api/rooms', room, {
-      // headers: this.headers
-    })
+    return this.http.post<RoomsList[]>('/api/rooms', room)
   }
 
   editRoom(room: RoomsList) {

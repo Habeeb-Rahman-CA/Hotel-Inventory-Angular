@@ -8,11 +8,12 @@ import { catchError, map, Observable, of, Subject, Subscription } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { ConfigService } from '../services/config.service';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-rooms',
   standalone: true,
-  imports: [CommonModule, RoomsListComponent, HeaderComponent, RouterModule],
+  imports: [CommonModule, RoomsListComponent, HeaderComponent, RouterModule, ReactiveFormsModule, FormsModule],
   templateUrl: './rooms.component.html',
   styleUrl: './rooms.component.css'
 })
@@ -23,9 +24,11 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
 
   hideRooms = true
 
+  priceFilter = new FormControl(0)
+
   selectedRooms!: RoomsList
 
-  room: Rooms = {
+  rooms: Rooms = {
     totalRooms: 20,
     availableRooms: 10,
     bookedRooms: 5
@@ -53,6 +56,8 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
 
 
   constructor(@SkipSelf() private roomsService: RoomsService, private configService:ConfigService ) { }
+
+ 
 
   ngOnInit(): void {
 
